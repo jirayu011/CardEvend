@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Card Creator</title>
+</head>
+<body style="text-align:center; font-family:sans-serif; margin-top:100px;">
+
+  <h1>สร้างการ์ดของคุณ 💖</h1>
+
+  <input id="name" placeholder="ชื่อผู้รับ"><br><br>
+  <input id="msg" placeholder="ข้อความ"><br><br>
+
+  <button onclick="createCard()">สร้างการ์ด</button>
+
+  <script>
+    function createCard(){
+      const name = document.getElementById("name").value;
+      const msg = document.getElementById("msg").value;
+
+      const url = `card.html?name=${encodeURIComponent(name)}&msg=${encodeURIComponent(msg)}`;
+      window.location.href = url;
+    }
+  </script>
+
+</body>
+</html>

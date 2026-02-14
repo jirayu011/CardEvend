@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Card</title>
+</head>
+<body style="text-align:center; font-family:sans-serif; margin-top:100px;">
+
+  <h1 id="showName"></h1>
+  <p id="showMsg"></p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("showName").innerText = params.get("name");
+    document.getElementById("showMsg").innerText = params.get("msg");
+  </script>
+
+</body>
+</html>

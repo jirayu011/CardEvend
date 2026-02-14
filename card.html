@@ -843,19 +843,7 @@ function launchRoses(){
     setTimeout(()=> rose.remove(),8000);
   },600);
 }
-function formatMessage(text) {
-  if (!text) return "";
 
-  // แยกอังกฤษกับไทยอัตโนมัติ
-  text = text.replace(/([a-zA-Z.])([ก-๙])/g, "$1\n\n$2");
-
-  // แยกประโยคภาษาไทย
-  text = text.replace(/\. /g, ".\n\n");
-
-  return text;
-}
-
-document.getElementById("showMessage").innerText = formatMessage(msg);
 </script>
 
 

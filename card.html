@@ -2,12 +2,50 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>My Card</title>
-</head>
-<body style="text-align:center; font-family:sans-serif; margin-top:100px;">
+  <title>Your Card</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    }
 
-  <h1 id="showName"></h1>
-  <p id="showMsg"></p>
+    .card {
+      background: white;
+      padding: 50px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 350px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      color: #ff4d6d;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:scale(0.8);}
+      to {opacity:1; transform:scale(1);}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1 id="showName"></h1>
+    <p id="showMsg"></p>
+  </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);

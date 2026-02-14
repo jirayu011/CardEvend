@@ -1,85 +1,213 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Event Card Creator</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    }
+<meta charset="UTF-8">
+<title>Corporate Gala 2026</title>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    .card-box {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      text-align: center;
-      width: 320px;
-      animation: fadeIn 1s ease-in-out;
-    }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  overflow-x: hidden;
 
-    h1 {
-      margin-bottom: 20px;
-    }
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-    }
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #ff4d6d;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+/* Glow Background */
+.glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.5;
+  animation: move 20s infinite alternate ease-in-out;
+  z-index: 0;
+}
 
-    button:hover {
-      background: #e63956;
-      transform: scale(1.05);
-    }
+.glow1 {
+  background: #ff4d6d;
+  top: -200px;
+  left: -200px;
+}
 
-    @keyframes fadeIn {
-      from {opacity:0; transform:translateY(20px);}
-      to {opacity:1; transform:translateY(0);}
-    }
-  </style>
+.glow2 {
+  background: #00c6ff;
+  bottom: -200px;
+  right: -200px;
+  animation-delay: 5s;
+}
+
+@keyframes move {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(100px, 80px); }
+  100% { transform: translate(-80px, 120px); }
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 100px 20px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(255,215,0,0.6);
+}
+
+.hero p {
+  opacity: 0.85;
+  margin-top: 15px;
+}
+
+/* Form Box */
+.form-box {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  max-width: 420px;
+  margin: 0 auto 80px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 2;
+}
+
+.form-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(45deg, gold, #ffcc00);
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px gold;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card-box">
-    <h1>💌 สร้างการ์ดงานพิเศษ</h1>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
 
-    <input id="name" placeholder="ชื่อผู้รับ">
-    <input id="msg" placeholder="ข้อความพิเศษ">
+<div class="hero">
+  <h1>✨ Create Your Special Valentine Card ✨</h1>
+  <p>Make someone feel loved in just one click.</p>
+</div>
 
-    <button onclick="createCard()">สร้างการ์ด</button>
-  </div>
+<div class="form-box">
+  <h2>Create Your Special Card</h2>
 
-  <script>
-    function createCard(){
-      const name = document.getElementById("name").value;
-      const msg = document.getElementById("msg").value;
+  <input id="name" placeholder="ชื่อคุณและคู่รักของคุณ">
+  <input id="msg" placeholder="ข้อความถึงคนรัก">
+<input type="file" id="mediaInput" accept="image/*" multiple>
+  <button onclick="createCard()">Start Creating 💌</button>
+</div>
+<script>
+function createCard(){
+  const name = document.getElementById("name").value.trim();
+  const msg = document.getElementById("msg").value.trim();
+  const fileInput = document.getElementById("mediaInput");
+  const file = fileInput ? fileInput.files[0] : null;
 
-      const url = `card.html?name=${encodeURIComponent(name)}&msg=${encodeURIComponent(msg)}`;
-      window.location.href = url;
+  if(!name){
+    alert("Please enter name");
+    return;
+  }
+
+  localStorage.setItem("cardName", name);
+  localStorage.setItem("cardMsg", msg || "");
+
+  if(file){
+    // ถ้าเป็นรูป
+    if(file.type.startsWith("image")){
+      const reader = new FileReader();
+      reader.onload = function(e){
+        const img = new Image();
+        img.onload = function(){
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          // ลดขนาดลงสูงสุด 800px
+          const maxSize = 800;
+          let width = img.width;
+          let height = img.height;
+
+          if(width > height){
+            if(width > maxSize){
+              height *= maxSize / width;
+              width = maxSize;
+            }
+          } else {
+            if(height > maxSize){
+              width *= maxSize / height;
+              height = maxSize;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressed = canvas.toDataURL("image/jpeg", 0.7);
+
+          localStorage.setItem("cardMedia", compressed);
+          localStorage.setItem("cardMediaType", "image/jpeg");
+          window.location.href = "card.html";
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+
+    } else {
+      alert("Video not supported yet in this stable version.");
     }
-  </script>
+
+  } else {
+    localStorage.removeItem("cardMedia");
+    localStorage.removeItem("cardMediaType");
+    window.location.href = "card.html";
+  }
+}
+</script>
 
 </body>
 </html>
